@@ -53,6 +53,7 @@ model.compile(
         metrics=["accuracy"])
 
 print("\nTreinando modelo...")
+
 model.fit(
         x_train, 
         y_train, 
