@@ -300,55 +300,34 @@ Copie o link do seu repositório e envie conforme orientações do processo sele
 
 ## 📝 Relatório do Candidato
 
-O arquivo (`README.md`) deve ser utilizado como **relatório final do desafio**.
-
-Preencha todas as seções de forma clara e objetiva.
-
-> 💡 Dica: não é necessário um relatório extenso.  
-> O mais importante é demonstrar **clareza nas decisões técnicas**.
-
-
-
-**Exemplo:**
-
-👤 Identificação: **Nome Completo:**
-
+👤 Identificação: **Francisco Irlan de Oliveira Barros**
 
 ### 1️⃣ Resumo da Arquitetura do Modelo
 
-Descreva, em palavras, a arquitetura da **CNN** implementada no arquivo
-`train_model.py`.
-
-
+O modelo desenvolvido baseia-se numa arquitetura de **Rede Neuronal Convolucional (CNN)** sequencial, otimizada para tarefas de visão computacional em dispositivos de recursos limitados. A estrutura inclui:
+* **Camadas Convolucionais**: Duas camadas `Conv2D` (com 32 e 64 filtros, respetivamente) utilizando a função de ativação ReLU para a extração de características das imagens do MNIST.
+* **Redução de Dimensionalidade**: Camadas de `MaxPooling2D` aplicadas após cada convolução para selecionar as características mais relevantes e reduzir a carga computacional.
+* **Regularização e Saída**: Uma camada de `Flatten` seguida de um `Dropout` de 50% para mitigar o *overfitting*, finalizando com uma camada `Dense` de 10 neurónios com ativação Softmax para a classificação dos dígitos.
 
 ### 2️⃣ Bibliotecas Utilizadas
 
-Liste as principais bibliotecas utilizadas no projeto, preferencialmente
-com suas versões.
-
-
+* **TensorFlow / Keras**: Utilizada para a construção, treino e conversão do modelo para o formato TFLite.
+* **NumPy**: Empregada no pré-processamento dos dados, especificamente para a normalização dos pixels e ajuste das dimensões dos arrays.
+* **OS**: Utilizada para a gestão de ficheiros e para o cálculo da métrica de redução de tamanho após a otimização.
 
 ### 3️⃣ Técnica de Otimização do Modelo
 
-Explique qual técnica foi utilizada para otimizar o modelo no arquivo
-`optimize_model.py`.
-
-
+Foi aplicada a técnica de **Quantização de Faixa Dinâmica (Dynamic Range Quantization)**. Esta abordagem converte os pesos do modelo de ponto flutuante (32 bits) para inteiros de 8 bits no momento da conversão para TensorFlow Lite, o que reduz significativamente o tamanho do modelo e melhora a latência de execução em CPUs de sistemas embarcados, mantendo uma precisão próxima do modelo original.
 
 ### 4️⃣ Resultados Obtidos
 
-Informe o principal resultado obtido após o treinamento do modelo.
-
-
+* **Desempenho**: O modelo atingiu uma acurácia elevada no conjunto de testes (tipicamente superior a 98% para o dataset MNIST) após 5 épocas de treino.
+* **Eficiência de Espaço**: A conversão para `.tflite` com otimização resultou numa redução substancial do tamanho do ficheiro em comparação com o formato `.h5` original, cumprindo os requisitos de **Edge AI** estipulados no desafio.
 
 ### 5️⃣ Comentários Adicionais (Opcional)
 
-Utilize este espaço para comentar:
-- Dificuldades encontradas  
-- Decisões técnicas importantes  
-- Limitações do modelo  
-- Aprendizados durante o desafio
-
+* **Decisões de Engenharia**: A escolha de uma CNN simples com poucas camadas convolucionais foi feita para garantir a compatibilidade com ambientes de integração contínua (CI) e restrições de hardware.
+* **Ajustes de Fluxo**: Os dados foram normalizados para o intervalo [0, 1] para facilitar a convergência do otimizador Adam durante o treino em CPU.
 
 ## 🆘 Suporte
 
